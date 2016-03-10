@@ -236,11 +236,14 @@ namespace ssdump
                             // Output view if it was requested, or if no specific views were requested.
                             if (tables.Count == 0 || tables.Contains(view.Name))
                             {
-                                urns.Add(view.Urn);
-
-                                foreach (ExtendedProperty extendedProperty in view.ExtendedProperties)
+                                if (!view.IsSystemObject)
                                 {
-                                    urns.Add(extendedProperty.Urn);
+                                    urns.Add(view.Urn);
+
+                                    foreach (ExtendedProperty extendedProperty in view.ExtendedProperties)
+                                    {
+                                        urns.Add(extendedProperty.Urn);
+                                    }
                                 }
                             }
                         }
