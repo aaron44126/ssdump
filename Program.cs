@@ -58,13 +58,13 @@ namespace ssdump
             }
 
             // Check command-line parameters and make sure that everything is in order.
-            if (extras.Count == 0)
+            if (!help && extras.Count == 0)
             {
                 Console.Error.WriteLine("Name of the database to dump is required.");
                 help = true;
             }
 
-            if ((settings.Password == null && settings.User != null) || (settings.Password != null && settings.User == null))
+            if (!help && (settings.Password == null && settings.User != null) || (settings.Password != null && settings.User == null))
             {
                 Console.Error.WriteLine("To use SQL Server authentication, both user and password must be provided.");
                 help = true;
