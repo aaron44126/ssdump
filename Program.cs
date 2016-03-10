@@ -17,7 +17,7 @@ namespace ssdump
         /// <summary>
         /// Program version.
         /// </summary>
-        private static readonly string ProgramVersion = "0.8";
+        private static readonly string ProgramVersion = "0.8.1";
 
         /// <summary>
         /// Program starts here.
