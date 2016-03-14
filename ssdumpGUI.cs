@@ -20,6 +20,14 @@ namespace ssdump
         {
             InitializeComponent();
             cboHostList.DataSource = Properties.Settings.Default.Hosts;
+
+            processor.Host = cboHostList.SelectedText;
+            txtUsername.Enabled = !ckbUseWinAuth.Checked;
+            txtPassword.Enabled = !ckbUseWinAuth.Checked;
+            if (txtMaxPacket.Text.Length == 0)
+            {
+                processor.MaxPacket = -1;
+            }
         }
 
         private void ssdumpGUI_Activated(object sender, System.EventArgs e)
@@ -52,18 +60,22 @@ namespace ssdump
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            Stream myStream;
-
             saveFileDialog1.Filter = "sql files (*.sql)|*.sql|All files(*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                processor.FilePath = saveFileDialog1.FileName;
+                try
                 {
-                    myStream.Close();
+                    processor.Execute();
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("ERORR: " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+                
             }
         }
 
@@ -98,6 +110,60 @@ namespace ssdump
                 processor.Tables.Clear();
             }
             processor.Tables.AddRange(txtTables.Lines);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTimeout_TextChanged_1(object sender, EventArgs e)
+        {
+            int timeout;
+            int.TryParse(txtTimeout.Text, out timeout);
+            processor.Timeout = timeout;
+        }
+
+        private void ckbEncryption_CheckedChanged(object sender, EventArgs e)
+        {
+            processor.UseEncryption = ckbEncryption.Checked;
+        }
+
+        private void txtMaxPacket_TextChanged(object sender, EventArgs e)
+        {
+            if (txtMaxPacket.Text.Length == 0)
+            {
+                processor.MaxPacket = -1;
+            }
+            else {
+                int maxPacket;
+                int.TryParse(txtMaxPacket.Text, out maxPacket);
+                processor.MaxPacket = maxPacket;
+            }
+        }
+
+        private void ckbCreateDatabase_CheckedChanged(object sender, EventArgs e)
+        {
+            processor.IncludeCreateDatabase = ckbCreateDatabase.Checked;
+        }
+
+        private void ckbCreateUser_CheckedChanged(object sender, EventArgs e)
+        {
+            processor.IncludeUsers = ckbCreateUser.Checked;
+            
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ckbUseWinAuth_CheckedChanged(object sender, EventArgs e)
+        {
+            txtUsername.Enabled = !ckbUseWinAuth.Checked;
+            txtPassword.Enabled = !ckbUseWinAuth.Checked;
+            txtUsername.Text = "";
+            txtPassword.Text = "";
         }
     }
 }
