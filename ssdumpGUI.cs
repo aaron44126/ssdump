@@ -14,20 +14,12 @@ namespace ssdump
 {
     public partial class ssdumpGUI : Form
     {
-        DumpProcessor processor = new DumpProcessor();
-
         public ssdumpGUI()
         {
             InitializeComponent();
             cboHostList.DataSource = Properties.Settings.Default.Hosts;
-
-            processor.Host = cboHostList.SelectedText;
             txtUsername.Enabled = !ckbUseWinAuth.Checked;
             txtPassword.Enabled = !ckbUseWinAuth.Checked;
-            if (txtMaxPacket.Text.Length == 0)
-            {
-                processor.MaxPacket = -1;
-            }
         }
 
         private void ssdumpGUI_Activated(object sender, System.EventArgs e)
@@ -48,16 +40,6 @@ namespace ssdump
             Application.Exit();
         }
 
-        private void ckbNoData_CheckedChanged(object sender, EventArgs e)
-        {
-            processor.NoData = ckbNoData.Checked;
-        }
-
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
         private void btnExecute_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "sql files (*.sql)|*.sql|All files(*.*)|*.*";
@@ -66,96 +48,59 @@ namespace ssdump
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                DumpProcessor processor = GetProcessorWithValues();
                 processor.FilePath = saveFileDialog1.FileName;
+                Form processing = new ProcessingForm();
+                processing.Show(this);
+                processing.Refresh();
                 try
                 {
                     processor.Execute();
+                    processing.Close();
+                    MessageBox.Show("SQL Server Dump Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 }
                 catch (Exception ex)
                 {
+                    processing.Close();
                     MessageBox.Show("ERORR: " + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
                 
             }
         }
 
-        /// <summary>
-        /// Set Windows Authentication flag based on if there's something in the username field.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtUsername_TextChanged(object sender, EventArgs e)
+        private DumpProcessor GetProcessorWithValues()
         {
-            processor.Username = txtUsername.Text;
-            processor.UseWindowsAuthentication = (txtUsername.TextLength == 0);
-        }
+            DumpProcessor _processor = new DumpProcessor();
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-            processor.Password = txtPassword.Text;
-        }
+            _processor.Host = cboHostList.Text;
+            _processor.UseWindowsAuthentication = ckbUseWinAuth.Checked;
+            _processor.Username = txtUsername.Text;
+            _processor.Password = txtPassword.Text;
+            _processor.DatabaseName = txtDatabase.Text;
 
-        private void txtDatabase_TextChanged(object sender, EventArgs e)
-        {
-            processor.DatabaseName = txtDatabase.Text;
-        }
+            _processor.Tables = new List<string>();
+            _processor.Tables.AddRange(txtTables.Lines);
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (processor.Tables == null)
-            {
-                processor.Tables = new List<string>();
-            } else
-            {
-                processor.Tables.Clear();
-            }
-            processor.Tables.AddRange(txtTables.Lines);
-        }
+            _processor.NoData = ckbNoData.Checked;
+            _processor.IncludeCreateDatabase = ckbCreateDatabase.Checked;
+            _processor.IncludeUsers = ckbCreateUser.Checked;
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtTimeout_TextChanged_1(object sender, EventArgs e)
-        {
+            _processor.UseEncryption = ckbEncryption.Checked;
             int timeout;
             int.TryParse(txtTimeout.Text, out timeout);
-            processor.Timeout = timeout;
-        }
+            _processor.Timeout = timeout;
 
-        private void ckbEncryption_CheckedChanged(object sender, EventArgs e)
-        {
-            processor.UseEncryption = ckbEncryption.Checked;
-        }
-
-        private void txtMaxPacket_TextChanged(object sender, EventArgs e)
-        {
             if (txtMaxPacket.Text.Length == 0)
             {
-                processor.MaxPacket = -1;
+                _processor.MaxPacket = -1;
             }
             else {
                 int maxPacket;
                 int.TryParse(txtMaxPacket.Text, out maxPacket);
-                processor.MaxPacket = maxPacket;
+                _processor.MaxPacket = maxPacket;
             }
-        }
 
-        private void ckbCreateDatabase_CheckedChanged(object sender, EventArgs e)
-        {
-            processor.IncludeCreateDatabase = ckbCreateDatabase.Checked;
-        }
-
-        private void ckbCreateUser_CheckedChanged(object sender, EventArgs e)
-        {
-            processor.IncludeUsers = ckbCreateUser.Checked;
-            
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            return _processor;
         }
 
         private void ckbUseWinAuth_CheckedChanged(object sender, EventArgs e)

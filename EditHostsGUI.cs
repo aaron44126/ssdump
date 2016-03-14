@@ -108,7 +108,7 @@ namespace ssdump
 
             Button btnAddHost = new Button()
             {
-                Text = "Add Host",
+                Text = "Save",
                 Left = 270,
                 Width = 100,
                 Top = 75,
