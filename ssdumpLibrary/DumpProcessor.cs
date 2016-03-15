@@ -29,7 +29,7 @@ namespace ssdump
         public string FilePath { get; set; }
 
         public int Timeout { get; set; }
-        public int MaxPacket { get; set; }
+        public int? MaxPacket { get; set; }
 
         public bool UseWindowsAuthentication { get; set; }
         public bool UseEncryption { get; set; }
@@ -37,8 +37,25 @@ namespace ssdump
         public bool IncludeCreateDatabase { get; set; }
         public bool IncludeUsers { get; set; }
 
+        public bool WriteToConsole { get; set; }
+
         public List<string> Tables { get; set; }
         public List<string> ExtraStatements { get; set; }
+
+        public DumpProcessor()
+        {
+            // Set default values.
+            Host = "localhost";
+            IncludeCreateDatabase = false;
+            IncludeUsers = false;
+            NoData = false;
+            MaxPacket = null;
+            Password = null;
+            Timeout = 10;
+            Username = null;
+            UseEncryption = false;
+            UseWindowsAuthentication = true; WriteToConsole = false;
+        }
 
         /// <summary>
         /// Process the request and save the result.
@@ -59,9 +76,9 @@ namespace ssdump
                 server.ConnectionContext.Password = Password;
             }
 
-            if (MaxPacket >= 0)
+            if (MaxPacket != null && MaxPacket >= 0)
             {
-                server.ConnectionContext.PacketSize = MaxPacket;
+                server.ConnectionContext.PacketSize = (int) MaxPacket;
             }
 
             // Connect.
@@ -225,30 +242,18 @@ namespace ssdump
         /// Write scripts to console.
         /// </summary>
         /// <param name="scripts">Collection of scripts to be written</param>
-        private void WriteScripts(StringCollection scripts)
-        {
-            TextWriter TextWriterStream = new StreamWriter(FilePath);
-            foreach (string script in scripts)
-            {
-                TextWriterStream.WriteLine(script);
-            }
-            if(ExtraStatements.Count > 0)
-            {
-                foreach (string extra in ExtraStatements)
-                {
-                    TextWriterStream.WriteLine(extra);
-                }
-            }
-            TextWriterStream.Close();
-        }
-
-        /// <summary>
-        /// Write scripts to console.
-        /// </summary>
-        /// <param name="scripts">Collection of scripts to be written</param>
         private void WriteScripts(IEnumerable<string> scripts)
         {
-            TextWriter TextWriterStream = new StreamWriter(FilePath);
+            TextWriter TextWriterStream;
+            if (WriteToConsole)
+            {
+                TextWriterStream = Console.Out;
+            }
+            else
+            {
+                TextWriterStream = new StreamWriter(FilePath);
+            }
+
             foreach (string script in scripts)
             {
                 TextWriterStream.WriteLine(script);
