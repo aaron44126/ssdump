@@ -20,7 +20,7 @@ namespace ssdump
         /// <summary>
         /// Program version.
         /// </summary>
-        public static readonly string ProgramVersion = "0.9";
+        public static readonly string ProgramVersion = "0.9.1";
 
         public string Host { get; set; }
         public string Username { get; set; }
