@@ -24,9 +24,13 @@ ssdump uses libraries from SSMS.  You need to have SQL Server Management Studio 
 
 ssdump writes the SQL script to the console and it can be redirected to a file using a batch script or any other standard scripting tool.  Like SSMS, currently, ssdump can only dump one database at a time.
 
+## GUI
+
+A GUI tool, ssdumpGUI, is available as well.  A window pops up with information to fill in, but the process is the same as the command-line tool.
+
 ## Development
 
-If you clone this repository, what you will get is a Visual Studio 2015 project that should have everything that you need to build the program yourself.  Free versions of Visual Studio (Express or Community) should work fine.  The project includes references to SSMS DLLs, you will need to have SQL Server Management Studio 2014 installed.  The only other third-party dependency has been copied in for now, it is the file `Mono.Options/Options.cs` which is a command line parameter parsing library from the [Mono project](https://github.com/mono/mono/tree/master/mcs/class/Mono.Options).
+If you clone this repository, what you will get is a Visual Studio 2015 solution that should have everything that you need to build the program yourself.  Free versions of Visual Studio (Express or Community) should work fine.  The solution includes references to SSMS DLLs, you will need to have SQL Server Management Studio 2014 installed.  The only other third-party dependency has been copied in for now, it is the file `ssdumpConsole/Mono.Options/Options.cs` which is a command line parameter parsing library from the [Mono project](https://github.com/mono/mono/tree/master/mcs/class/Mono.Options).
 
 [This tutorial from MSSQLTips](https://www.mssqltips.com/sqlservertip/1833/generate-scripts-for-database-objects-with-smo-for-sql-server/) served as the starting point for this project.
 
