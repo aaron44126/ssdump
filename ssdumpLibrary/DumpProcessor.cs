@@ -10,8 +10,18 @@ using System.Threading.Tasks;
 
 namespace ssdump
 {
-    class DumpProcessor
+    public class DumpProcessor
     {
+        /// <summary>
+        /// Program name.
+        /// </summary>
+        public static readonly string ProgramName = "ssdump";
+
+        /// <summary>
+        /// Program version.
+        /// </summary>
+        public static readonly string ProgramVersion = "0.8.1";
+
         public string Host { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -38,7 +48,7 @@ namespace ssdump
 
             // Set up server object and connection options.
             Server server = new Server(Host);
-            server.ConnectionContext.ApplicationName = Program.ProgramName + " v" + Program.ProgramVersion;
+            server.ConnectionContext.ApplicationName = ProgramName + " v" + ProgramVersion;
             server.ConnectionContext.ConnectTimeout = Timeout;
             server.ConnectionContext.LoginSecure = UseWindowsAuthentication;
             server.ConnectionContext.EncryptConnection = UseEncryption;

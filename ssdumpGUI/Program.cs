@@ -11,16 +11,6 @@ namespace ssdump
     class Program
     {
         /// <summary>
-        /// Program name.
-        /// </summary>
-        public static readonly string ProgramName = "ssdump";
-
-        /// <summary>
-        /// Program version.
-        /// </summary>
-        public static readonly string ProgramVersion = "0.8.1";
-
-        /// <summary>
         /// Program starts here.
         /// </summary>
         /// <param name="args">Command-line options</param>
