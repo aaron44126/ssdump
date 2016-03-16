@@ -64,6 +64,7 @@
             this.lblEncryption = new System.Windows.Forms.Label();
             this.ckbEncryption = new System.Windows.Forms.CheckBox();
             this.txtMaxPacket = new System.Windows.Forms.TextBox();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -94,7 +95,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -131,7 +132,7 @@
             this.cboHostList.Location = new System.Drawing.Point(157, 3);
             this.cboHostList.Name = "cboHostList";
             this.cboHostList.Size = new System.Drawing.Size(196, 21);
-            this.cboHostList.TabIndex = 2;
+            this.cboHostList.TabIndex = 1;
             // 
             // lblUsername
             // 
@@ -149,7 +150,7 @@
             this.txtUsername.Location = new System.Drawing.Point(157, 53);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(196, 20);
-            this.txtUsername.TabIndex = 4;
+            this.txtUsername.TabIndex = 3;
             // 
             // txtPassword
             // 
@@ -157,7 +158,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(196, 20);
-            this.txtPassword.TabIndex = 6;
+            this.txtPassword.TabIndex = 4;
             // 
             // lblPassword
             // 
@@ -166,26 +167,31 @@
             this.lblPassword.Location = new System.Drawing.Point(3, 81);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblPassword.TabIndex = 5;
+            this.lblPassword.TabIndex = 4;
             this.lblPassword.Text = "Password:";
             this.lblPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ckbNoData
             // 
             this.ckbNoData.AutoSize = true;
+            this.ckbNoData.BackColor = System.Drawing.SystemColors.Control;
             this.ckbNoData.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ckbNoData.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ckbNoData.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ckbNoData.Location = new System.Drawing.Point(282, 3);
             this.ckbNoData.Name = "ckbNoData";
-            this.ckbNoData.Size = new System.Drawing.Size(15, 14);
-            this.ckbNoData.TabIndex = 8;
-            this.ckbNoData.UseVisualStyleBackColor = true;
+            this.ckbNoData.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ckbNoData.Size = new System.Drawing.Size(29, 17);
+            this.ckbNoData.TabIndex = 0;
+            this.ckbNoData.Text = " ";
+            this.ckbNoData.UseVisualStyleBackColor = false;
             // 
             // txtDatabase
             // 
             this.txtDatabase.Location = new System.Drawing.Point(157, 103);
             this.txtDatabase.Name = "txtDatabase";
             this.txtDatabase.Size = new System.Drawing.Size(196, 20);
-            this.txtDatabase.TabIndex = 10;
+            this.txtDatabase.TabIndex = 5;
             // 
             // lblDatabase
             // 
@@ -194,7 +200,7 @@
             this.lblDatabase.Location = new System.Drawing.Point(3, 107);
             this.lblDatabase.Name = "lblDatabase";
             this.lblDatabase.Size = new System.Drawing.Size(87, 13);
-            this.lblDatabase.TabIndex = 9;
+            this.lblDatabase.TabIndex = 5;
             this.lblDatabase.Text = "Database Name:";
             this.lblDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -204,7 +210,7 @@
             this.lblTables.Location = new System.Drawing.Point(15, 174);
             this.lblTables.Name = "lblTables";
             this.lblTables.Size = new System.Drawing.Size(106, 13);
-            this.lblTables.TabIndex = 11;
+            this.lblTables.TabIndex = 6;
             this.lblTables.Text = "Tables (one per line):";
             // 
             // txtTables
@@ -213,14 +219,14 @@
             this.txtTables.Multiline = true;
             this.txtTables.Name = "txtTables";
             this.txtTables.Size = new System.Drawing.Size(347, 76);
-            this.txtTables.TabIndex = 12;
+            this.txtTables.TabIndex = 1;
             // 
             // btnExecute
             // 
             this.btnExecute.Location = new System.Drawing.Point(149, 498);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(216, 23);
-            this.btnExecute.TabIndex = 15;
+            this.btnExecute.TabIndex = 4;
             this.btnExecute.Text = "Save SQL Server Dump to a File...";
             this.btnExecute.UseVisualStyleBackColor = true;
             this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
@@ -249,7 +255,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(360, 128);
-            this.tableLayoutPanel1.TabIndex = 17;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // ckbUseWinAuth
             // 
@@ -258,10 +264,12 @@
             this.ckbUseWinAuth.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ckbUseWinAuth.Checked = true;
             this.ckbUseWinAuth.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbUseWinAuth.Location = new System.Drawing.Point(157, 30);
+            this.ckbUseWinAuth.Location = new System.Drawing.Point(157, 29);
             this.ckbUseWinAuth.Name = "ckbUseWinAuth";
-            this.ckbUseWinAuth.Size = new System.Drawing.Size(15, 14);
-            this.ckbUseWinAuth.TabIndex = 12;
+            this.ckbUseWinAuth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ckbUseWinAuth.Size = new System.Drawing.Size(29, 17);
+            this.ckbUseWinAuth.TabIndex = 2;
+            this.ckbUseWinAuth.Text = " ";
             this.ckbUseWinAuth.UseVisualStyleBackColor = true;
             this.ckbUseWinAuth.CheckedChanged += new System.EventHandler(this.ckbUseWinAuth_CheckedChanged);
             // 
@@ -272,7 +280,7 @@
             this.lblWinAuth.Location = new System.Drawing.Point(3, 31);
             this.lblWinAuth.Name = "lblWinAuth";
             this.lblWinAuth.Size = new System.Drawing.Size(147, 13);
-            this.lblWinAuth.TabIndex = 11;
+            this.lblWinAuth.TabIndex = 2;
             this.lblWinAuth.Text = "Use Windows Authentication:";
             this.lblWinAuth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -282,7 +290,7 @@
             this.groupBox1.Location = new System.Drawing.Point(18, 279);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(347, 100);
-            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
@@ -321,10 +329,13 @@
             // 
             this.ckbCreateDatabase.AutoSize = true;
             this.ckbCreateDatabase.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ckbCreateDatabase.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckbCreateDatabase.Location = new System.Drawing.Point(282, 26);
             this.ckbCreateDatabase.Name = "ckbCreateDatabase";
-            this.ckbCreateDatabase.Size = new System.Drawing.Size(15, 14);
-            this.ckbCreateDatabase.TabIndex = 11;
+            this.ckbCreateDatabase.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ckbCreateDatabase.Size = new System.Drawing.Size(29, 17);
+            this.ckbCreateDatabase.TabIndex = 1;
+            this.ckbCreateDatabase.Text = " ";
             this.ckbCreateDatabase.UseVisualStyleBackColor = true;
             // 
             // lblCreateDatabase
@@ -353,10 +364,13 @@
             // 
             this.ckbCreateUser.AutoSize = true;
             this.ckbCreateUser.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ckbCreateUser.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckbCreateUser.Location = new System.Drawing.Point(282, 49);
             this.ckbCreateUser.Name = "ckbCreateUser";
-            this.ckbCreateUser.Size = new System.Drawing.Size(15, 14);
-            this.ckbCreateUser.TabIndex = 13;
+            this.ckbCreateUser.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ckbCreateUser.Size = new System.Drawing.Size(29, 18);
+            this.ckbCreateUser.TabIndex = 2;
+            this.ckbCreateUser.Text = " ";
             this.ckbCreateUser.UseVisualStyleBackColor = true;
             // 
             // gpbConnectionSettings
@@ -365,7 +379,7 @@
             this.gpbConnectionSettings.Location = new System.Drawing.Point(18, 385);
             this.gpbConnectionSettings.Name = "gpbConnectionSettings";
             this.gpbConnectionSettings.Size = new System.Drawing.Size(347, 100);
-            this.gpbConnectionSettings.TabIndex = 19;
+            this.gpbConnectionSettings.TabIndex = 3;
             this.gpbConnectionSettings.TabStop = false;
             this.gpbConnectionSettings.Text = "Connection Settings";
             // 
@@ -402,10 +416,11 @@
             // 
             // txtTimeout
             // 
+            this.txtTimeout.Dock = System.Windows.Forms.DockStyle.Left;
             this.txtTimeout.Location = new System.Drawing.Point(282, 30);
             this.txtTimeout.Name = "txtTimeout";
             this.txtTimeout.Size = new System.Drawing.Size(43, 20);
-            this.txtTimeout.TabIndex = 12;
+            this.txtTimeout.TabIndex = 1;
             this.txtTimeout.Text = "10";
             // 
             // lblTimeout
@@ -434,24 +449,39 @@
             // 
             this.ckbEncryption.AutoSize = true;
             this.ckbEncryption.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ckbEncryption.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckbEncryption.Location = new System.Drawing.Point(282, 3);
             this.ckbEncryption.Name = "ckbEncryption";
-            this.ckbEncryption.Size = new System.Drawing.Size(15, 14);
-            this.ckbEncryption.TabIndex = 13;
+            this.ckbEncryption.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ckbEncryption.Size = new System.Drawing.Size(29, 21);
+            this.ckbEncryption.TabIndex = 0;
+            this.ckbEncryption.Text = " ";
             this.ckbEncryption.UseVisualStyleBackColor = true;
             // 
             // txtMaxPacket
             // 
+            this.txtMaxPacket.Dock = System.Windows.Forms.DockStyle.Left;
             this.txtMaxPacket.Location = new System.Drawing.Point(282, 57);
             this.txtMaxPacket.Name = "txtMaxPacket";
             this.txtMaxPacket.Size = new System.Drawing.Size(43, 20);
-            this.txtMaxPacket.TabIndex = 16;
+            this.txtMaxPacket.TabIndex = 2;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(-1, 522);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(28, 13);
+            this.lblVersion.TabIndex = 20;
+            this.lblVersion.Text = "v0.0";
             // 
             // ssdumpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 536);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.gpbConnectionSettings);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -521,5 +551,6 @@
         private System.Windows.Forms.TextBox txtMaxPacket;
         private System.Windows.Forms.Label lblWinAuth;
         private System.Windows.Forms.CheckBox ckbUseWinAuth;
+        private System.Windows.Forms.Label lblVersion;
     }
 }

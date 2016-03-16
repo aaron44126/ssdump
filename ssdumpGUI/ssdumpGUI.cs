@@ -19,6 +19,7 @@ namespace ssdump
             cboHostList.DataSource = Properties.Settings.Default.Hosts;
             txtUsername.Enabled = !ckbUseWinAuth.Checked;
             txtPassword.Enabled = !ckbUseWinAuth.Checked;
+            lblVersion.Text = "v" + DumpProcessor.ProgramVersion;
         }
 
         private void ssdumpGUI_Activated(object sender, System.EventArgs e)
