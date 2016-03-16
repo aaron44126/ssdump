@@ -64,6 +64,7 @@
             this.lblEncryption = new System.Windows.Forms.Label();
             this.ckbEncryption = new System.Windows.Forms.CheckBox();
             this.txtMaxPacket = new System.Windows.Forms.TextBox();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -94,7 +95,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -447,11 +448,22 @@
             this.txtMaxPacket.Size = new System.Drawing.Size(43, 20);
             this.txtMaxPacket.TabIndex = 16;
             // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(-1, 522);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(28, 13);
+            this.lblVersion.TabIndex = 20;
+            this.lblVersion.Text = "v0.0";
+            // 
             // ssdumpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 536);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.gpbConnectionSettings);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -521,5 +533,6 @@
         private System.Windows.Forms.TextBox txtMaxPacket;
         private System.Windows.Forms.Label lblWinAuth;
         private System.Windows.Forms.CheckBox ckbUseWinAuth;
+        private System.Windows.Forms.Label lblVersion;
     }
 }
