@@ -72,6 +72,8 @@ namespace ssdump
                 }
                 else
                 {
+                    processor.DatabaseName = WhichDatabases(extras)[0];
+                    processor.Tables = WhichTables(extras);
                     processor.Execute();
                 }
             }
@@ -83,27 +85,40 @@ namespace ssdump
         }
 
         /// <summary>
-        /// Write scripts to console.
+        /// Figure out which databases to dump.
         /// </summary>
-        /// <param name="scripts">Collection of scripts to be written</param>
-        private static void WriteScripts(StringCollection scripts)
+        /// <param name="extras">Unparsed command-line options</param>
+        /// <returns>List of databases to dump</returns>
+        private static List<string> WhichDatabases(List<string> extras)
         {
-            foreach (string script in scripts)
-            {
-                Console.WriteLine(script);
-            }
+            List<string> databases = new List<string>();
+
+            // First extra is database to dump.
+            databases.Add(extras[0]);
+
+            return databases;
         }
 
         /// <summary>
-        /// Write scripts to console.
+        /// Figure out which tables to dump.
         /// </summary>
-        /// <param name="scripts">Collection of scripts to be written</param>
-        private static void WriteScripts(IEnumerable<string> scripts)
+        /// <param name="extras">Unparsed command-line options</param>
+        /// <returns>List of tables to dump</returns>
+        private static List<string> WhichTables(List<string> extras)
         {
-            foreach (string script in scripts)
+            List<string> tables = new List<string>();
+
+            // It will be an empty list (meaning all tables) unless...
+            if (extras.Count > 1)
             {
-                Console.WriteLine(script);
+                // Everything except first value is a table to dump.
+                for (int index = 1; index < extras.Count; index++)
+                {
+                    tables.Add(extras[index]);
+                }
             }
+
+            return tables;
         }
 
         /// <summary>
