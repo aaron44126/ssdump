@@ -20,7 +20,7 @@ namespace ssdump
         /// <summary>
         /// Program version.
         /// </summary>
-        public static readonly string ProgramVersion = "0.9.1";
+        public static readonly string ProgramVersion = "0.9.2";
 
         public string Host { get; set; }
         public string Username { get; set; }
@@ -62,7 +62,6 @@ namespace ssdump
         /// </summary>
         public void Execute()
         {
-
             // Set up server object and connection options.
             Server server = new Server(Host);
             server.ConnectionContext.ApplicationName = ProgramName + " v" + ProgramVersion;
