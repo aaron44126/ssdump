@@ -62,7 +62,6 @@ namespace ssdump
         /// </summary>
         public void Execute()
         {
-
             // Set up server object and connection options.
             Server server = new Server(Host);
             server.ConnectionContext.ApplicationName = ProgramName + " v" + ProgramVersion;
