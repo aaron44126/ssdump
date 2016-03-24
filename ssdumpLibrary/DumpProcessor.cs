@@ -227,7 +227,7 @@ namespace ssdump
                 // Dump everything.
                 if (urns.Count > 0)
                 {
-                    WriteScripts(scripter.EnumScriptWithList(urns.ToArray()));
+                    WriteScripts(scripter, urns);
                 }
             }
             else
@@ -240,9 +240,20 @@ namespace ssdump
         /// <summary>
         /// Write scripts to console.
         /// </summary>
-        /// <param name="scripts">Collection of scripts to be written</param>
-        private void WriteScripts(IEnumerable<string> scripts)
+        /// <param name="scripter">Scripter object with options to write scripts</param>
+        /// <param name="scripter">List of objects to write out</param>
+        private void WriteScripts(Scripter scripter, List<Urn> urns)
         {
+            // https://connect.microsoft.com/SQLServer/feedback/details/363076/smo-create-procedure-generated-script-is-unusable
+            // You must write to file in order to get "GO" statements to appear.
+            string tempFilename = Path.GetTempFileName();
+            scripter.Options.ToFileOnly = true;
+            scripter.Options.FileName = tempFilename;
+
+            scripter.EnumScriptWithList(urns.ToArray()); // Will write to file.
+            string script = File.ReadAllText(tempFilename);
+            File.Delete(tempFilename);
+
             TextWriter TextWriterStream;
             if (WriteToConsole)
             {
@@ -253,15 +264,14 @@ namespace ssdump
                 TextWriterStream = new StreamWriter(FilePath);
             }
 
-            foreach (string script in scripts)
-            {
-                TextWriterStream.WriteLine(script);
-            }
+            TextWriterStream.Write(script);
+
             if (ExtraStatements.Count > 0)
             {
                 foreach (string extra in ExtraStatements)
                 {
                     TextWriterStream.WriteLine(extra);
+                    TextWriterStream.WriteLine("GO");
                 }
             }
             TextWriterStream.Close();
