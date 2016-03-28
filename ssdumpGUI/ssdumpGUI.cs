@@ -42,6 +42,18 @@ namespace ssdump
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
+            string NewHostName = cboHostList.Text;
+
+            if (!Properties.Settings.Default.Hosts.Contains(NewHostName))
+            {
+                int NewSelectionIndex = Properties.Settings.Default.Hosts.Count;
+                Properties.Settings.Default.Hosts.Add(NewHostName);
+                Properties.Settings.Default.Save();
+                cboHostList.DataSource = null;
+                cboHostList.DataSource = Properties.Settings.Default.Hosts;
+                cboHostList.SelectedIndex = NewSelectionIndex;
+            }
+
             saveFileDialog1.Filter = "sql files (*.sql)|*.sql|All files(*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;

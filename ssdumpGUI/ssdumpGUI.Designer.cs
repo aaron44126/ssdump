@@ -127,7 +127,6 @@
             // 
             // cboHostList
             // 
-            this.cboHostList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboHostList.FormattingEnabled = true;
             this.cboHostList.Location = new System.Drawing.Point(157, 3);
             this.cboHostList.Name = "cboHostList";
