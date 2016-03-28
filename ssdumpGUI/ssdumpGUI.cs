@@ -45,6 +45,7 @@ namespace ssdump
             saveFileDialog1.Filter = "sql files (*.sql)|*.sql|All files(*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = txtDatabase.Text + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -57,7 +58,7 @@ namespace ssdump
                 {
                     processor.Execute();
                     processing.Close();
-                    MessageBox.Show("SQL Server Dump Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    MessageBox.Show("SQL Server Dump Complete", "Complete", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
                 }
                 catch (Exception ex)
                 {
